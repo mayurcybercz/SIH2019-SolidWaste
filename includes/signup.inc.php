@@ -19,5 +19,5 @@ $pwd=mysqli_real_escape_string($conn,$_POST['pwd']);
 $sql="INSERT INTO user(user_firstname,user_lastname,user_email,user_mobile,user_uid,user_pwd) VALUES ('$first','$last','$email','$mobile','$uid','$pwd')";
 mysqli_query($conn,$sql);
 
-header("Location:/Final/login.php?signup=success");
+header("Location:/Final/authentication/login.php?signup=success");
 exit();

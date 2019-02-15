@@ -1,5 +1,5 @@
 <?php
-include_once 'header.php';
+include_once 'layout/header.php';
 include_once 'includes/dbh.inc.php';
 
 $sql = "SELECT lat,lng FROM dustbin_location ";
@@ -105,5 +105,9 @@ $conn->close();
 
   </body>
 </html>
+
+
+
+
 
 

@@ -1,0 +1,18 @@
+a{
+    text-decoration: none;
+    color: white;
+}
+a:active{
+    color: white;
+}
+a:hover{
+    color:white;
+    text-decoration: none;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+}

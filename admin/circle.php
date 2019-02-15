@@ -1,6 +1,6 @@
 <?php 
 
-include_once '../header.php';
+include_once '../layout/header.php';
 
 ?>
 
