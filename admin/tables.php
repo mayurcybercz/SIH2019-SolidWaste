@@ -1,3 +1,22 @@
+
+<?php 
+
+include_once '../includes/dbh.inc.php';
+$sql = "SELECT * FROM order_details";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        $temp[] = $row;
+     }
+} else {
+    echo "0 results";
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,14 +28,17 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Border Utilities</title>
+  <title> Admin Tables </title>
 
-  <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
+  <!-- Custom styles for this template -->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -29,11 +51,11 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Admin</div>
       </a>
 
       <!-- Divider -->
@@ -41,7 +63,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -58,30 +80,30 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
+          <span>Tracking</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
+            <h6 class="collapse-header">Functions:</h6>
+            <a class="collapse-item" href="#">Vehicle Tracking</a>
+            <a class="collapse-item" href="#">Dustbin Location</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item active">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Utilities</span>
         </a>
-        <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item active" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
+            <h6 class="collapse-header">Custom Links:</h6>
+            <a class="collapse-item" href="#">User Complaints</a>
+            <a class="collapse-item" href="#">Link2</a>
+            <a class="collapse-item" href="#">Link3</a>
+            <a class="collapse-item" href="#">Link4</a>
           </div>
         </div>
       </li>
@@ -91,39 +113,14 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Addons
+        Data
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+      <li class="nav-item active">
+        <a class="nav-link" href="tables.php">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li>
@@ -332,82 +329,52 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-1 text-gray-800">Border Utilities</h1>
-          <p class="mb-4">Bootstrap's default utility classes can be found on the official <a href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities below were created to extend this theme past the default utility classes built into Bootstrap's framework.</p>
+          <h1 class="h3 mb-2 text-gray-800">All orders</h1>
 
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Border Left Utilities -->
-            <div class="col-lg-6">
-
-              <div class="card mb-4 py-3 border-left-primary">
-                <div class="card-body">
-                  .border-left-primary
-                </div>
-              </div>
-
-              <div class="card mb-4 py-3 border-left-success">
-                <div class="card-body">
-                  .border-left-success
-                </div>
-              </div>
-
-              <div class="card mb-4 py-3 border-left-info">
-                <div class="card-body">
-                  .border-left-info
-                </div>
-              </div>
-
-              <div class="card mb-4 py-3 border-left-warning">
-                <div class="card-body">
-                  .border-left-warning
-                </div>
-              </div>
-
-              <div class="card mb-4 py-3 border-left-danger">
-                <div class="card-body">
-                  .border-left-danger
-                </div>
-              </div>
-
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
-
-            <!-- Border Bottom Utilities -->
-            <div class="col-lg-6">
-
-              <div class="card mb-4 py-3 border-bottom-primary">
-                <div class="card-body">
-                  .border-bottom-primary
-                </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Sr.No</th>
+                      <th>Order_No</th>
+                      <th>Order_Date</th>
+                      <th>User_Name</th>
+                      <th>Delivery_Date</th>
+                      <th>Collect_date</th>
+                      <th>Type_of_Bin</th>
+                      <th>Size_of_Bin</th>
+                      <th>No_of_Bin</th>
+                      <th>Garbage_Amount</th>
+                      <th>Status</th>
+                      <th>Return_Amount</th> 
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Sr.No</th>
+                      <th>Order_No</th>
+                      <th>Order_Date</th>
+                      <th>User_Name</th>
+                      <th>Delivery_Date</th>
+                      <th>Collect_date</th>
+                      <th>Type_of_Bin</th>
+                      <th>Size_of_Bin</th>
+                      <th>No_of_Bin</th>
+                      <th>Garbage_Amount</th>
+                      <th>Status</th>
+                      <th>Return_Amount</th>
+                    </tr>
+                  </tfoot>
+               
+                </table>
               </div>
-
-              <div class="card mb-4 py-3 border-bottom-success">
-                <div class="card-body">
-                  .border-bottom-success
-                </div>
-              </div>
-
-              <div class="card mb-4 py-3 border-bottom-info">
-                <div class="card-body">
-                  .border-bottom-info
-                </div>
-              </div>
-
-              <div class="card mb-4 py-3 border-bottom-warning">
-                <div class="card-body">
-                  .border-bottom-warning
-                </div>
-              </div>
-
-              <div class="card mb-4 py-3 border-bottom-danger">
-                <div class="card-body">
-                  .border-bottom-danger
-                </div>
-              </div>
-
             </div>
-
           </div>
 
         </div>
@@ -450,7 +417,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="../authentication/admin-login.php">Logout</a>
         </div>
       </div>
     </div>
@@ -466,6 +433,52 @@
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
 
-</body>
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
+
+</body>
+<script>
+var temp = <?php echo json_encode($temp) ?>;
+window.onload = function() 
+{
+
+ 
+
+  for(var i=temp.length-1;i>=0;i--)
+  {
+
+        var table = document.getElementById("dataTable");
+        var row = table.insertRow(1);
+        var cell1 = row.insertCell();
+        var cell2 = row.insertCell();
+        var cell3 = row.insertCell();
+        var cell4 = row.insertCell();
+        var cell5 = row.insertCell();
+        var cell6 = row.insertCell();
+        var cell7 = row.insertCell();
+        var cell8 = row.insertCell();
+        var cell9 = row.insertCell();
+        var cell10 = row.insertCell();
+        var cell11= row.insertCell();
+        var cell12 = row.insertCell();
+        console.log(temp[i]["sr"]);
+        cell1.innerHTML = temp[i]["sr"];
+        cell2.innerHTML = temp[i]["orderno"];
+        cell3.innerHTML = temp[i]["orderdate"];
+        cell4.innerHTML = temp[i]["username"];
+        cell5.innerHTML = temp[i]["deliverydate"];
+        cell6.innerHTML = temp[i]["collectdate"];
+        cell7.innerHTML = temp[i]["typeofbin"];
+        cell8.innerHTML = temp[i]["sizeofbin"];
+        cell9.innerHTML = temp[i]["noofbin"];
+        cell10.innerHTML = temp[i]["garbageamount"];
+        cell11.innerHTML = temp[i]["status"];
+        cell12.innerHTML = temp[i]["returnamount"];
+  }
+};
+</script>
 </html>

@@ -3,7 +3,7 @@
 
 include_once 'dbh.inc.php';
 // Start the session
-session_start();
+
 
 // Set session variables
 $user = mysqli_real_escape_string($conn,$_POST['uid']);

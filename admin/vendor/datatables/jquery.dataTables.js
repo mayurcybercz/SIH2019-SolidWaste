@@ -11419,22 +11419,22 @@
 			 * empty of data (regardless of filtering). Note that this is an optional
 			 * parameter - if it is not given, the value of `zeroRecords` will be used
 			 * instead (either the default or given value).
-			 *  @type string
-			 *  @default No data available in table
-			 *
-			 *  @dtopt Language
-			 *  @name DataTable.defaults.language.emptyTable
-			 *
-			 *  @example
-			 *    $(document).ready( function() {
-			 *      $('#example').dataTable( {
-			 *        "language": {
-			 *          "emptyTable": "No data available in table"
-			 *        }
-			 *      } );
-			 *    } );
+			//  *  @type string
+			//  *  @default No data available in table
+			//  *
+			//  *  @dtopt Language
+			//  *  @name DataTable.defaults.language.emptyTable
+			//  *
+			//  *  @example
+			//  *    $(document).ready( function() {
+			//  *      $('#example').dataTable( {
+			//  *        "language": {
+			//  *          "emptyTable": "No data available in table"
+			//  *        }
+			//  *      } );
+			//  *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			// "sEmptyTable": "No data available in table",
 	
 	
 			/**
@@ -11451,43 +11451,43 @@
 			 * * `\_PAGE\_` - Current page number
 			 * * `\_PAGES\_` - Total number of pages of data in the table
 			 *
-			 *  @type string
-			 *  @default Showing _START_ to _END_ of _TOTAL_ entries
-			 *
-			 *  @dtopt Language
-			 *  @name DataTable.defaults.language.info
-			 *
-			 *  @example
-			 *    $(document).ready( function() {
-			 *      $('#example').dataTable( {
-			 *        "language": {
-			 *          "info": "Showing page _PAGE_ of _PAGES_"
-			 *        }
-			 *      } );
-			 *    } );
-			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			//  *  @type string
+			//  *  @default Showing _START_ to _END_ of _TOTAL_ entries
+			//  *
+			//  *  @dtopt Language
+			//  *  @name DataTable.defaults.language.info
+			//  *
+			//  *  @example
+			//  *    $(document).ready( function() {
+			//  *      $('#example').dataTable( {
+			//  *        "language": {
+			//  *          "info": "Showing page _PAGE_ of _PAGES_"
+			//  *        }
+			//  *      } );
+			//  *    } );
+			//  */
+			// "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
 	
 	
 			/**
 			 * Display information string for when the table is empty. Typically the
 			 * format of this string should match `info`.
-			 *  @type string
-			 *  @default Showing 0 to 0 of 0 entries
+			//  *  @type string
+			//  *  @default Showing 0 to 0 of 0 entries
 			 *
-			 *  @dtopt Language
-			 *  @name DataTable.defaults.language.infoEmpty
-			 *
-			 *  @example
-			 *    $(document).ready( function() {
-			 *      $('#example').dataTable( {
-			 *        "language": {
-			 *          "infoEmpty": "No entries to show"
-			 *        }
-			 *      } );
-			 *    } );
-			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			//  *  @dtopt Language
+			//  *  @name DataTable.defaults.language.infoEmpty
+			//  *
+			//  *  @example
+			//  *    $(document).ready( function() {
+			//  *      $('#example').dataTable( {
+			//  *        "language": {
+			//  *          "infoEmpty": "No entries to show"
+			//  *        }
+			//  *      } );
+			//  *    } );
+			//  */
+			// "sInfoEmpty": "Showing 0 to 0 of 0 entries",
 	
 	
 			/**
@@ -11746,27 +11746,27 @@
 			"sUrl": "",
 	
 	
-			/**
-			 * Text shown inside the table records when the is no information to be
-			 * displayed after filtering. `emptyTable` is shown when there is simply no
-			 * information in the table at all (regardless of filtering).
-			 *  @type string
-			 *  @default No matching records found
-			 *
-			 *  @dtopt Language
-			 *  @name DataTable.defaults.language.zeroRecords
-			 *
-			 *  @example
-			 *    $(document).ready( function() {
-			 *      $('#example').dataTable( {
-			 *        "language": {
-			 *          "zeroRecords": "No records to display"
-			 *        }
-			 *      } );
-			 *    } );
-			 */
-			"sZeroRecords": "No matching records found"
-		},
+		// 	/**
+		// 	 * Text shown inside the table records when the is no information to be
+		// 	 * displayed after filtering. `emptyTable` is shown when there is simply no
+		// 	 * information in the table at all (regardless of filtering).
+		// 	 *  @type string
+		// 	 *  @default No matching records found
+		// 	 *
+		// 	 *  @dtopt Language
+		// 	 *  @name DataTable.defaults.language.zeroRecords
+		// 	 *
+		// 	 *  @example
+		// 	 *    $(document).ready( function() {
+		// 	 *      $('#example').dataTable( {
+		// 	 *        "language": {
+		// 	 *          "zeroRecords": "No records to display"
+		// 	 *        }
+		// 	 *      } );
+		// 	 *    } );
+		// 	 */
+		// 	"sZeroRecords": "No matching records found"
+		// },
 	
 	
 		/**
