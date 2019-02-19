@@ -1,19 +1,19 @@
 <?php 
 
 include_once '../includes/dbh.inc.php';
-$sql = "SELECT COUNT(status) FROM order_details WHERE status='pending'";
+$sql = "SELECT COUNT(orderstatus) FROM order_details WHERE orderstatus='pending'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-    $temp = $row["COUNT(status)"];
+    $temp = $row["COUNT(orderstatus)"];
   }
 } else {
   echo "0 results";
 }
 
-$sql = "SELECT SUM(garbageamount) FROM order_details where status='success'";
+$sql = "SELECT SUM(garbageamount) FROM order_details where orderstatus='success'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/sb-admin-2.css" rel="stylesheet">
   <link href="../public/css/admin-main.css" rel="stylesheet">
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -77,7 +77,7 @@ if ($result->num_rows > 0) {
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"   style="background-color:black;">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
@@ -130,7 +130,7 @@ if ($result->num_rows > 0) {
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Custom Links:</h6>
               <a class="collapse-item" href="#">User Complaints</a>
-              <a class="collapse-item" href="#">Link2</a>
+              <a class="collapse-item" href="sendnotification.php">Send Notification</a>
               <a class="collapse-item" href="#">Link3</a>
               <a class="collapse-item" href="#">Link4</a>
             </div>
@@ -461,8 +461,7 @@ if ($result->num_rows > 0) {
                       <div class="text-center">
                         <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_environment_iaus.svg" alt="">
                       </div>
-                      <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-                      <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
+                      This is some important text which should be changed before final integration
                     </div>
                   </div>
                 </div>

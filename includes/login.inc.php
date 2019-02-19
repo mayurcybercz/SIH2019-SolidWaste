@@ -23,7 +23,7 @@ if($temp==$pass)
     header("Location:/Final/index.php?login=success");
 }
 else{
-    header("Location:/Final/authentication/login.php?login=fail");
+    header("Location:/Final/login.php?login=fail");
 }
 $conn->close();
 ?>

@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/sb-admin-2.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -341,7 +341,6 @@ if ($result->num_rows > 0) {
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Sr.No</th>
                       <th>Order_No</th>
                       <th>Order_Date</th>
                       <th>User_Name</th>
@@ -357,7 +356,6 @@ if ($result->num_rows > 0) {
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Sr.No</th>
                       <th>Order_No</th>
                       <th>Order_Date</th>
                       <th>User_Name</th>
@@ -453,7 +451,6 @@ window.onload = function()
 
         var table = document.getElementById("dataTable");
         var row = table.insertRow(1);
-        var cell1 = row.insertCell();
         var cell2 = row.insertCell();
         var cell3 = row.insertCell();
         var cell4 = row.insertCell();
@@ -465,18 +462,16 @@ window.onload = function()
         var cell10 = row.insertCell();
         var cell11= row.insertCell();
         var cell12 = row.insertCell();
-        console.log(temp[i]["sr"]);
-        cell1.innerHTML = temp[i]["sr"];
         cell2.innerHTML = temp[i]["orderno"];
         cell3.innerHTML = temp[i]["orderdate"];
-        cell4.innerHTML = temp[i]["username"];
+        cell4.innerHTML = temp[i]["user_uid"];
         cell5.innerHTML = temp[i]["deliverydate"];
         cell6.innerHTML = temp[i]["collectdate"];
         cell7.innerHTML = temp[i]["typeofbin"];
         cell8.innerHTML = temp[i]["sizeofbin"];
         cell9.innerHTML = temp[i]["noofbin"];
         cell10.innerHTML = temp[i]["garbageamount"];
-        cell11.innerHTML = temp[i]["status"];
+        cell11.innerHTML = temp[i]["orderstatus"];
         cell12.innerHTML = temp[i]["returnamount"];
   }
 };

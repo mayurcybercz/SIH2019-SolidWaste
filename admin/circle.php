@@ -1,12 +1,11 @@
 <?php 
-
-include_once '../layout/header.php';
+include_once '../includes/dbh.inc.php';
+include_once '../layout/default-header.php';
 
 ?>
 
 
 <?php
-$conn = new mysqli("127.0.0.1", "root", "password", "sih2019");
 
 
 $sql = "SELECT lat,lng FROM dustbin_location ";
@@ -19,6 +18,7 @@ if ($result->num_rows > 0) {
         $lng[]=$row["lng"];
 
         //echo $row["roll"];
+        echo "green lat lng";
     }
 } else {
     echo "0 results";
@@ -33,26 +33,61 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
       $area[] = $row["area"];
       $population[]=$row["population"];
-
+      echo "green area population";
         //echo $row["roll"];
     }
 } else {
     echo "0 results";
 }
-
-$sql = "select sum(population) from dustbin_location  join  ward_details on dustbin_location.ward=ward_details.ward";
+//sumofpopulation
+$sql = "select sum(population) from ward_details;";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
         $sumpopulation=$row["sum(population)"];
-
+        echo "green sumofpopulation";
         //echo $row["roll"];
     }
 } else {
     echo "0 results";
 }
+
+
+//red circle dustbin need to be installed
+
+$sql = "SELECT lat,lng FROM futuredustbin_location ";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        $latf[]=$row["lat"];
+        $lngf[]=$row["lng"];
+        echo "red lat lng";
+        //echo $row["roll"];
+    }
+} else {
+    echo "0 results";
+}
+
+//redcirlce join
+$sql = "select area,population from futuredustbin_location  join  ward_details on futuredustbin_location.ward=ward_details.ward;";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+      $areaf[] = $row["area"];
+      $populationf[]=$row["population"];
+      echo "red area population";
+        //echo $row["roll"];
+    }
+} else {
+    echo "0 results";
+}
+
 
 
 $conn->close();
@@ -100,9 +135,15 @@ $conn->close();
       var area  =<?php echo json_encode($area) ?>;
       var sumpopulation  =<?php echo json_encode($sumpopulation) ?>;
 
-      for(var i=0;i<lat1.length;i++){
-        console.log(lat1[i],lng1[i],population[i],area[i]);
-      }
+      //redcircle variables
+      var latf = <?php echo json_encode($latf) ?>;
+      var lngf  =<?php echo json_encode($lngf) ?>;
+      var populationf  =<?php echo json_encode($populationf) ?>;
+      var areaf  =<?php echo json_encode($areaf) ?>;
+
+      // for(var i=0;i<lat1.length;i++){
+      //   console.log(lat1[i],lng1[i],population[i],area[i]);
+      // }
 
       //console.log(sumpopulation);
       // This example creates circles on the map, representing populations in North
@@ -132,6 +173,21 @@ $conn->close();
             map: map,
             center: new google.maps.LatLng(lat1[i],lng1[i]),
             radius: Math.sqrt(sumpopulation*1000/(population[i]/area[i]))
+          });
+        }
+        }
+        for (var i=0;i<latf.length;i++) {
+          if(area[i]>0){
+          // Add the redcircle for this city to the map.
+          var cityCircle = new google.maps.Circle({
+            strokeColor: '#008000',
+            strokeOpacity: 0.3,
+            strokeWeight: 2,
+            fillColor: '#008000',
+            fillOpacity: 0.2,
+            map: map,
+            center: new google.maps.LatLng(latf[i],lngf[i]),
+            radius: Math.sqrt(sumpopulation*1000/(populationf[i]/areaf[i]))
           });
         }
         }
