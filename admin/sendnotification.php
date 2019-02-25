@@ -5,22 +5,21 @@ include_once '../layout/header.php';
 ?>
 
 <?php
-//include_once 'dbh.inc.php';
-
-// $username = mysqli_real_escape_string($conn,$_POST['username']);
-// $order_location = mysqli_real_escape_string($conn,$_POST['order_loction']);
-// $delivery_date = mysqli_real_escape_string($conn,$_POST['delivery_date']);
-// $type_waste = mysqli_real_escape_string($conn,$_POST['type_waste']);
-// $size_bin = mysqli_real_escape_string($conn,$_POST['size_bin']);
-// $number_bin = mysqli_real_escape_string($conn,$_POST['number_bin']);
-
-//$sql="INSERT INTO order_details(admin_firstname,admin_lastname,admin_email,admin_mobile,admin_uid,admin_pwd) VALUES ('$admin_first','$admin_last','$admin_email','$admin_mobile','$uid','$pwd')";
-//mysqli_query($conn,$sql);
-
-
-
+include_once '../includes/dbh.inc.php';
 if(isset($_POST["submit"])){
-  echo "<script> alert('Order Placed Successfully'); </script>";
+$user_name = mysqli_real_escape_string($conn,$_POST['user_name']);
+$order_number = mysqli_real_escape_string($conn,$_POST['order_number']);
+$notification = mysqli_real_escape_string($conn,$_POST['notification']);
+$notify_date = mysqli_real_escape_string($conn,$_POST['notify_date']);
+$order_status = mysqli_real_escape_string($conn,$_POST['order_status']);
+
+$sql="INSERT INTO user_notifications(user_uid,orderno,notifydate,notification,orderstatus) VALUES ('$user_name','$order_number','$notify_date','$notification','$order_status')";
+mysqli_query($conn,$sql);
+
+
+
+
+  echo "<script> alert('Notification sent Successfully'); </script>";
   echo "<script> window.location.replace('index.php'); </script>";
 
 }
@@ -28,7 +27,7 @@ if(isset($_POST["submit"])){
 ?>
 <html>
 <head>
-<title>DustbinOnDemand</title>
+<title>Send Notification</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -113,49 +112,39 @@ a {
 
 <form class="signup-form"  method="POST">
   <div class="container">
-    <h1>Get dustbin On Demand</h1>
+    <h1>Send Notification</h1>
     <hr>
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Username" class="full" name="username" required>
+    <div style="float:left;position:absolute;width:50%;">
+    <label><b>Order Number</b></label>
+    <input type="number" placeholder="Order Number"  name="order_number" class="inputtype" required>
+    <div style="float:right;position:relative;width:50%;">
     
+    <label><b>User Name</b></label>
+    
+    <input type="text" placeholder="User Name"  name="user_name" class="inputtype" required>
+    </div>
+  </div>
+  <br><br><br><br>
 
    
-    <label><b>Location</b></label>
-    <input type="text" placeholder="Location" class="full" name="order_location"  required>
+    <label><b>Notification</b></label>
+    <input type="text" placeholder="Notification" class="full" name="notification"  required>
     
 
 <div style="float:left;position:absolute;width:50%;">
-     <label><b>Delivery date</b></label>
+     <label><b>Notification Date</b></label>
     
-    <input type="date" placeholder="Delivery date"  name="delivery_date" class="inputtype" required>
+    <input type="date" placeholder="Notification Date"  name="notify_date" class="inputtype" required>
     </div>
-
     <div style="float:right;position:relative;width:50%;">
-    <label><b>Type of Waste</b></label>
-    <select class="inputtype" name="type_waste">
-    <option value="plastic">Plastic</option>
-    <option value="paper">Paper</option>
-  </select>
-  </div>
-
-<br><br><br><br>
-<div style="float:left;position:absolute;width:50%;">
-     <label><b>Size of bin</b></label>
-    
-     <select class="inputtype" name="size_bin">
-    <option value="100">100L</option>
-    <option value="200">200L</option>
-    </select>
-      </div>
-
-    <div style="float:right;position:relative;width:50%;">
-    <label><b>Number of Bins</b></label>
-    <input type="number" placeholder="Number of Bins"  name="number_bin" class="inputtype" required>
+    <label><b>Order Status</b></label>
+    <input type="text" placeholder="Order Status"  name="order_status" class="inputtype" required>
 
   </div>
   <br><br>
+  
 
-    <button type="submit" class="orderbtn" name="submit">Place Order</button>
+    <button type="submit" class="orderbtn" name="submit">Send</button>
   </div>
   
 </form>

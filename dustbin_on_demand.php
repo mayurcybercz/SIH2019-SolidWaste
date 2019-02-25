@@ -35,7 +35,6 @@ if($resp['status']=='OK'){
   mysqli_query($conn,$sql);
   $sqlorder = "select max(orderno) from order_details;";
   $result = $conn->query($sqlorder);
-
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {

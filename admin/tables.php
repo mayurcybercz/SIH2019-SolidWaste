@@ -86,7 +86,9 @@ if ($result->num_rows > 0) {
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Functions:</h6>
             <a class="collapse-item" href="#">Vehicle Tracking</a>
-            <a class="collapse-item" href="#">Dustbin Location</a>
+            <a class="collapse-item" href="../locatedustbin.php">Dustbin Location</a>
+            <a class="collapse-item" href="factory.php">Nearby Factory</a>
+            <a class="collapse-item" href="landfills.php">landfills</a>
           </div>
         </div>
       </li>
@@ -100,10 +102,9 @@ if ($result->num_rows > 0) {
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Links:</h6>
-            <a class="collapse-item" href="#">User Complaints</a>
-            <a class="collapse-item" href="#">Link2</a>
-            <a class="collapse-item" href="#">Link3</a>
-            <a class="collapse-item" href="#">Link4</a>
+            <a class="collapse-item" href="complaints.php">User Complaints</a>
+            <a class="collapse-item" href="sendnotification.php">Send Notification</a>
+          
           </div>
         </div>
       </li>
@@ -122,7 +123,7 @@ if ($result->num_rows > 0) {
       <li class="nav-item active">
         <a class="nav-link" href="tables.php">
           <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+          <span>All Orders</span></a>
       </li>
 
       <!-- Divider -->

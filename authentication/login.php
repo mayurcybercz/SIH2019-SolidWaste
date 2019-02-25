@@ -1,8 +1,3 @@
-<?php
- if(isset($_POST["submit"])){
-include_once '../includes/login.inc.php';
- }
-?>
 <html>
 <head>
 <title>Login</title>
@@ -81,7 +76,7 @@ a {
 </head>
 <body>
 
-<form class="login-form"  method="POST">
+<form class="login-form"  method="POST" action='../includes/login.inc.php'>
   <div class="container">
     <h1>User Login</h1>
      <hr> <br/>

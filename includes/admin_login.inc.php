@@ -2,6 +2,7 @@
 
 
 include_once 'dbh.inc.php';
+session_start();
 
 
 // Set session variables
@@ -13,12 +14,16 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        $temp = $row['admin_pwd']; }
+        $temp = $row['admin_pwd'];
+        $temp2=$row['admin_uid'];
+    }
 } else {
     echo "0 results";
 }
+print_r($_SESSION);
 if($temp==$pass)
 {
+    $_SESSION["current_admin"] = $temp2;
     header("Location:/Final/admin/index.php?login=success");
 }
 else{

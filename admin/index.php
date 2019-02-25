@@ -1,6 +1,13 @@
 <?php 
 
 include_once '../includes/dbh.inc.php';
+
+session_start();
+$current_admin="superadmin";
+
+if(isset($_SESSION["current_admin"])){
+  $current_user=$_SESSION["current_admin"];
+}
 $sql = "SELECT COUNT(orderstatus) FROM order_details WHERE orderstatus='pending'";
 $result = $conn->query($sql);
 
@@ -36,6 +43,20 @@ if ($result->num_rows > 0) {
 } else {
   echo "0 results";
 }
+
+$sql = "select sum(animal),sum(ewaste),sum(fiber),sum(food),sum(liquid),sum(paper),sum(plastic),sum(metal) from typeofwaste ";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    $chart1[] = $row;
+  }
+} else {
+  echo "0 results";
+}
+
+
 
 ?>
 
@@ -81,10 +102,10 @@ if ($result->num_rows > 0) {
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon ">
+          <i class="fas fa-user"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Admin </div>
+        <div class="sidebar-brand-text mx-3 logodiv">Ankur</div>
       </a>
 
       <!-- Divider -->
@@ -115,7 +136,9 @@ if ($result->num_rows > 0) {
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Functions:</h6>
               <a class="collapse-item" href="#">Vehicle Tracking</a>
-              <a class="collapse-item" href="#">Dustbin Location</a>
+              <a class="collapse-item" href="../locatedustbin.php">Dustbin Tracking</a>
+              <a class="collapse-item" href="factory.php">Nearby Factory</a>
+              <a class="collapse-item" href="landfills.php">Landfills</a>
             </div>
           </div>
         </li>
@@ -129,10 +152,9 @@ if ($result->num_rows > 0) {
           <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Custom Links:</h6>
-              <a class="collapse-item" href="#">User Complaints</a>
+              <a class="collapse-item" href="complaints.php">User Complaints</a>
               <a class="collapse-item" href="sendnotification.php">Send Notification</a>
-              <a class="collapse-item" href="#">Link3</a>
-              <a class="collapse-item" href="#">Link4</a>
+              
             </div>
           </div>
         </li>
@@ -151,7 +173,7 @@ if ($result->num_rows > 0) {
         <li class="nav-item">
           <a class="nav-link" href="tables.php">
             <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
+            <span>All Orders</span></a>
           </li>
 
           <!-- Divider -->
@@ -214,117 +236,12 @@ if ($result->num_rows > 0) {
                   </div>
                 </li>
 
-                <!-- Nav Item - Alerts -->
-                <li class="nav-item dropdown no-arrow mx-1">
-                  <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bell fa-fw"></i>
-                    <!-- Counter - Alerts -->
-                    <span class="badge badge-danger badge-counter">3+</span>
-                  </a>
-                  <!-- Dropdown - Alerts -->
-                  <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">
-                      Alerts Center
-                    </h6>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                      <div class="mr-3">
-                        <div class="icon-circle bg-primary">
-                          <i class="fas fa-file-alt text-white"></i>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="small text-gray-500">December 12, 2019</div>
-                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                      <div class="mr-3">
-                        <div class="icon-circle bg-success">
-                          <i class="fas fa-donate text-white"></i>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="small text-gray-500">December 7, 2019</div>
-                        $290.29 has been deposited into your account!
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                      <div class="mr-3">
-                        <div class="icon-circle bg-warning">
-                          <i class="fas fa-exclamation-triangle text-white"></i>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="small text-gray-500">December 2, 2019</div>
-                        Spending Alert: We've noticed unusually high spending for your account.
-                      </div>
-                    </a>
-                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                  </div>
-                </li>
 
-                <!-- Nav Item - Messages -->
-                <li class="nav-item dropdown no-arrow mx-1">
-                  <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-envelope fa-fw"></i>
-                    <!-- Counter - Messages -->
-                    <span class="badge badge-danger badge-counter">7</span>
-                  </a>
-                  <!-- Dropdown - Messages -->
-                  <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                    <h6 class="dropdown-header">
-                      Message Center
-                    </h6>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                      <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                        <div class="status-indicator bg-success"></div>
-                      </div>
-                      <div class="font-weight-bold">
-                        <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                      <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
-                        <div class="status-indicator"></div>
-                      </div>
-                      <div>
-                        <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                      <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-                        <div class="status-indicator bg-warning"></div>
-                      </div>
-                      <div>
-                        <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                      <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
-                        <div class="status-indicator bg-success"></div>
-                      </div>
-                      <div>
-                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                      </div>
-                    </a>
-                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                  </div>
-                </li>
-
-                <div class="topbar-divider d-none d-sm-block"></div>
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
                   <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small " id="adminname"></span>
                     <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                   </a>
                   <!-- Dropdown - User Information -->
@@ -362,7 +279,7 @@ if ($result->num_rows > 0) {
               <!-- Page Heading -->
               <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                <a href="../content/december.pdf" target='_blank' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
               </div>
 
               <!-- Content Row -->
@@ -455,269 +372,117 @@ if ($result->num_rows > 0) {
 
                   <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                      <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                      <h6 class="m-0 font-weight-bold text-primary">Welcome</h6>
                     </div>
                     <div class="card-body">
                       <div class="text-center">
-                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_environment_iaus.svg" alt="">
+                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 20rem;" src="img/undraw_environment_iaus.svg" alt="">
                       </div>
-                      This is some important text which should be changed before final integration
+                      Welcome to the SuperAdmin Dashboard. All the operations are monitored and micro-managed using this portal.<br>
+                      <ul>
+                        <li>Monitoring of waste-products supply chain</li>
+                        <li>Monitoring collection and displosal Operations</li>
+                        <li>Authentication of Dustbins and sites</li>
+                        <li>Resolving Customer Issues</li>
+
+                      </ul>
                     </div>
                   </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+
+                      <h6 class="m-0 font-weight-bold text-primary">Monthly Orders</h6>
+
+                    </div>
+                    <div class="card-body">
+                      <div class="text-center"> 
+
+                        <div id="container"></div>    
+                      </div> 
+
+                    </div>
+                  </div>
+                  
+
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-lg-6">
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+
+                      <h6 class="m-0 font-weight-bold text-primary">Distribution of paper and plastic waste by month</h6>
+
+                    </div>
+                    <div class="card-body">
+                      <div class="text-center"> 
+
+
+                        <div id="chart_div" style="width: 900px; height: 500px;"></div>
+                        
+
+
+
+                      </div> 
+
+                    </div>
+                  </div>
+
+
                 </div>
 
                 <div class="col-lg-6">
 
                   <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                      <h6 class="m-0 font-weight-bold text-primary">Pie Chart</h6>
+                      <h6 class="m-0 font-weight-bold text-primary">Analysis on types of waste-products based on their source</h6>
                     </div>
                     <div class="card-body">
                       <div class="text-center"> 
 
                         <div id="piechart"></div>
-                        <script type="text/javascript">
-                          google.charts.load('current', {'packages':['corechart']});
-                          google.charts.setOnLoadCallback(drawChart);
-                          var dataarray=[
-                          ['Task', 'Hours per Day'],
-                          ['Work', 8],
-                          ['Eat', 2],
-                          ['TV', 4],
-                          ['Gym', 2],
-                          ['Sleep', 8]
-                          ];
+                        
+                      </div> 
 
-                          function drawChart() {
-                            var data = google.visualization.arrayToDataTable(dataarray);
+                    </div>
+                  </div>
+                  
 
-  // Optional; add a title and set the width and height of the chart
-  var options = {'title':'', 'width':600, 'height':400,legend:'none'};
-
-  // Display the chart inside the <div> element with id="piechart"
-  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-  chart.draw(data, options);
-}
-</script>
-</div> 
-
-</div>
-</div>
-
-</div>
-</div>
-<div class="row">
-
-  <div class="col-lg-6">
+                </div>
+              </div>
 
 
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
+            </div>
 
-        <h6 class="m-0 font-weight-bold text-primary">Combo Chart</h6>
 
+
+
+
+
+
+          </div>
+          <!-- /.container-fluid -->
+
+        </div>
       </div>
-      <div class="card-body">
-        <div class="text-center"> 
-
-
-          <div id="chart_div" style="width: 900px; height: 500px;"></div>
-          <script type="text/javascript">
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawVisualization);
-
-            function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-          ['2004/05',  165,      938,         522,             998,           450,      614.6],
-          ['2005/06',  135,      1120,        599,             1268,          288,      682],
-          ['2006/07',  157,      1167,        587,             807,           397,      623],
-          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-          ]);
-
-        var options = {
-          title : '',
-          vAxis: {title: 'Cups'},
-          hAxis: {title: 'Month'},
-          seriesType: 'bars',
-          series: {5: {type: 'line'}},
-          legend: 'none',
-          'width':600
-
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      };
-    </script>
-
-
-
-  </div> 
-
-</div>
-</div>
-</div>
-
-<div class="col-lg-6">
-
-  <!-- Approach -->
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+      <!-- End of Main Content -->
     </div>
-    <div class="card-body">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-  </div>
-
-</div>
-</div>
-
-<div class="row">
-
-  <div class="col-lg-6">
-
-
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-
-        <h6 class="m-0 font-weight-bold text-primary">New Chart</h6>
-
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; Your Website 2019</span>
+        </div>
       </div>
-      <div class="card-body">
-        <div class="text-center"> 
+    </footer>
+    <!-- End of Footer -->
 
-          <div id="container"></div>
-          <script>
-            Highcharts.chart('container', {
-
-              title: {
-                text: 'Solar Employment Growth by Sector, 2010-2016'
-              },
-
-              subtitle: {
-                text: 'Source: thesolarfoundation.com'
-              },
-
-              yAxis: {
-                title: {
-                  text: 'Number of Employees'
-                }
-              },
-              legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle'
-              },
-
-              plotOptions: {
-                series: {
-                  label: {
-                    connectorAllowed: false
-                  },
-                  pointStart: 2010
-                }
-              },
-
-              series: [{
-                name: 'Installation',
-                data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-              }],
-
-              responsive: {
-                rules: [{
-                  condition: {
-                    maxWidth: 400
-                  },
-                  chartOptions: {
-                    legend: {
-                      layout: 'horizontal',
-                      align: 'center',
-                      verticalAlign: 'bottom'
-                    }
-                  }
-                }]
-              }
-
-            });
-          </script>
-          <style>
-
-        </style>
-      </div> 
-
-    </div>
   </div>
-</div>
-
-<div class="col-lg-6">
-
-  <!-- Approach -->
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-    </div>
-    <div class="card-body">
-      <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
-      <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
-
-    </div>
-  </div>
-
-</div>
-</div>
-
-
-
-
-
-
-
-</div>
-<!-- /.container-fluid -->
-
-</div>
-</div>
-<!-- End of Main Content -->
-</div>
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright &copy; Your Website 2019</span>
-    </div>
-  </div>
-</footer>
-<!-- End of Footer -->
-
-</div>
-<!-- End of Content Wrapper -->
+  <!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->
@@ -768,6 +533,10 @@ if ($result->num_rows > 0) {
   var order_pending = <?php echo json_encode($temp) ?>;
   var garbage_total=<?php echo json_encode($garbage_total) ?>;
   var garbage_monthly=<?php echo json_encode($garbage_monthly) ?>;
+  var adminname=<?php echo json_encode($current_admin) ?>;
+
+  var chart1=<?php echo json_encode($chart1)?>;
+  
   window.onload = function() 
   {
     var  PODiv = document.getElementById("pending_orders");
@@ -776,7 +545,140 @@ if ($result->num_rows > 0) {
     GTDiv.innerHTML=garbage_total;
     var  GMDiv = document.getElementById("monthly_garbage");
     GMDiv.innerHTML=garbage_monthly;
-  };
+    var  adminnamespan = document.getElementById("adminname");
+    adminnamespan.innerHTML=adminname;
+
+
+//chart1 start
+
+var animal=parseInt(chart1[0]["sum(animal)"]);
+var ewaste=parseInt(chart1[0]["sum(ewaste)"]);
+var fiber=parseInt(chart1[0]["sum(fiber)"]);
+var food=parseInt(chart1[0]["sum(food)"]);
+var liquid=parseInt(chart1[0]["sum(liquid)"]);
+var paper=parseInt(chart1[0]["sum(paper)"]);
+var plastic=parseInt(chart1[0]["sum(plastic)"]);
+var metal=parseInt(chart1[0]["sum(metal)"]);
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+var dataarray=[
+['Task', 'Hours per Day'],
+['Animal Waste', animal],
+['Ewaste', ewaste],
+['Fiber Waste', fiber],
+['Food', food],
+['Liquid', liquid],
+['Paper',paper],
+['Plastic',plastic],
+['Metal',metal]
+];
+
+function drawChart() {
+  var data = google.visualization.arrayToDataTable(dataarray);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'', 'width':700, 'height':500,legend:'right'};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+
+};
+
+  //chart1 end
+
+  //chart2 start
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawVisualization);
+
+  function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Orders Month', 'Plastic', 'Paper'],
+          ['2019/02',  865,      938],
+          ['2019/01',  735,      1120],
+          ['2018/12',  857,      1167],
+          ['2018/11',  939,      1110],
+          ['2018/10',  736,      691]
+          ]);
+
+        var options = {
+          title : 'Type of Waste',
+          vAxis: {title: 'Type of waste'},
+          hAxis: {title: 'Month'},
+          seriesType: 'bars',
+          series: {2: {type: 'line'}},
+          'width':600
+
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      };
+
+  //chart2 end
+
+  //chart3 start
+
+  Highcharts.chart('container', {
+
+    title: {
+      text: 'Monthly  On-demand Orders Growth by Sector, 2018-2019'
+    },
+
+    subtitle: {
+      text: 'Realtime data update'
+    },
+
+    yAxis: {
+      title: {
+        text: ''
+      }
+    },
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+      
+    },
+
+    series: [{
+      name: 'Orders',
+      data: [10, 70, 87, 150, 170, 210, 256, 314]
+    },
+    {
+      name: 'Garbage Amount',
+      data: [290, 525, 800, 1170, 1380, 1390, 1640, 1850]
+    }],
+
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 400
+        },
+        chartOptions: {
+          legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom'
+          }
+        }
+      }]
+    }
+
+  });
+
+
+
+  //chart3 end
 
 </script>
 
