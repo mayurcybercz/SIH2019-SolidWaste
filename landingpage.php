@@ -13,7 +13,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="stylecss.css" type="text/css">
-  
 </head>
 <style>
 .jumbotron {
@@ -22,6 +21,9 @@
     color: #fff;
     padding: 20px 25px;
     font-family: Montserrat, sans-serif;
+  }
+  .btn{
+    z-index:99;
   }
 </style>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -38,7 +40,7 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>About Company Page</h2>
+      <h2>Welcome to Ankur</h2>
       <div class="col-sm-6">
           <div class="column left">
               <br>
@@ -47,6 +49,11 @@
 <div class="column right">
       <h4><b>USERS</b></h4>
       <p>Users benifit by locating nearby dustbins, on-demand waste collections, earn by by seeling their waste and get real time latest updates about their </p>
+      
+      <button class="btn2" type="submit"  >Order Now
+     
+     </button>
+     
 </div>
            <!-- <span class="glyphicon glyphicon-signal logo"></span> -->
     </div> 
@@ -58,6 +65,11 @@
 <div class="column right">
       <h4><b>ADMINS</b></h4>
       <p>Admins benifit with waste management techniques such as best routing path for daily waste collections, better analysing techniques using the data collected, etc.    </p>
+      <form action="www.google.com">
+      <button class="btn2" type="submit"  >Order Now
+     
+     </button>
+     </form>
 </div>
            <!-- <span class="glyphicon glyphicon-signal logo"></span> -->
     </div> 
@@ -65,15 +77,15 @@
       <p><h5>AUTOMATIC SEGREGATION</h5></p>
       <p><h5>BEST DYNAMIC ROUTING PATH FOR WASTE COLLECTIONS</h5></p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
-      <button class="btn">Get in Touch
-       
-         </button>
+    
       
     </div>
      <div class="col-sm-4">
      <img src="public/images/main.png">
+     
       <!-- <span class="glyphicon glyphicon-signal logo"></span> -->
     </div> 
+
   </div>
 </div>
 
@@ -143,59 +155,31 @@
   <div class="row text-center slideanim">
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="public/images/1.jpg" alt="dustbin" width="400" height="300">
+        <img src="public/images/1.jpg" alt="dustbin" >
         <p><strong>Smart Dustbin Recognition </strong></p>
         <p>Users can click and upload photo of dustbin,which will be validated using our realtime Object detection. </p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        <img src="public/images/2.jpg" alt="truck" width="400" height="300">
+        <img src="public/images/2.jpg" alt="truck" >
         <p><strong>Smart Tracking and Dynamic Routing</strong></p>
         <p>We suggest Optimal routes for Garbage Collection vans and Tracking of Garbage vans.</p>
       </div>
     </div>
-    <div class="col-sm-4">
-      <div class="thumbnail">
-        <img src="sanfran.jpg" alt="San Francisco" width="400" height="400">
-        <p><strong>San Francisco</strong></p>
-        <p>Yes, San Fran is ours</p>
+    <div class="col-sm-4 " >
+      <div class="thumbnail" >
+        <img src="public/images/portfolio.png" alt="portfolio" >
+        <p><strong>On-Demand Waste Collection Service</strong></p>
+        <p>On-Demand Waste COllection</p>
       </div>
+    </div>
     </div>
   </div><br>
   
   
 
 
-
-<!-- Container (Contact Section) -->
-<div id="contact" class="container-fluid bg-grey">
-  <h2 class="text-center">CONTACT</h2>
-  <div class="row">
-    <div class="col-sm-5">
-      <p>Contact us and we'll get back to you within 24 hours.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span> Aurangabad, Maharashtra, India</p>
-      <p><span class="glyphicon glyphicon-phone"></span> +91 1234567890</p>
-      <p><span class="glyphicon glyphicon-envelope"></span> company@domain.com</p>
-    </div>
-    <div class="col-sm-7 slideanim">
-      <div class="row">
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-        </div>
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-        </div>
-      </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-      <div class="row">
-        <div class="col-sm-12 form-group">
-          <button class="btn btn-default pull-right" type="submit">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -235,6 +219,12 @@ $(document).ready(function(){
     });
   });
 })
+
+$(window).load(function() { // better to use $(document).ready(function(){
+    $('.btn2').on('click touchstart', function() {
+        alert("hello");
+    });
+});
 </script>
 
 </body>

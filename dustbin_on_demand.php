@@ -2,10 +2,14 @@
 
 
 include_once 'includes/dbh.inc.php';
-
+session_start();
+$current_user="superuser";
+if(isset($_SESSION["current_user"])){
+  $current_user=$_SESSION["current_user"];
+}
 if(isset($_POST["submit"])){
 
-$username = mysqli_real_escape_string($conn,$_POST['username']);
+$username = $current_user;
 $order_location = mysqli_real_escape_string($conn,$_POST['order_location']);
 $delivery_date = mysqli_real_escape_string($conn,$_POST['delivery_date']);
 $type_waste = mysqli_real_escape_string($conn,$_POST['type_waste']);
@@ -20,11 +24,11 @@ $location = str_replace(' ' ,'+', $order_location);
 
 //echo $location;
 //echo "<script> alert('success'); </script>";
-echo "<script
-src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyBEafrN_U_pOFvc8sWFWFYhScwComxhZpY\">
+echo "<script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyDh6azLDLezjjQELjrA9aHVlOGUwC6Vk2M\">
 </script>";
 
-$response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$location.'&key=AIzaSyBEafrN_U_pOFvc8sWFWFYhScwComxhZpY', false);
+$response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$location.'&key=AIzaSyAWXfT_MtWlzrJbVNI4zq-0f0hq4LHMzHw', false);
+echo $response;
 $resp = json_decode($response, true);
 if($resp['status']=='OK'){
   $lat = $resp['results'][0]['geometry']['location']['lat'];
@@ -71,8 +75,7 @@ body {
 .container {
   padding: 12px;
   background-color: white;
-  margin-left: 25%;
-  margin-right: 25%;
+ 
 }
 
 /* Full-width input fields */
@@ -119,7 +122,7 @@ h1{
 }
 
 .inputtype{
-  width: 13vw;
+  width: 20vw;
   background-color: #ddd;
   padding: 8px 10px;
   border: none;
@@ -142,8 +145,7 @@ a {
   <div class="container">
     <h1>Get dustbin On Demand</h1>
     <hr>
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Username" class="full" name="username" required>
+    
     
 
    
@@ -177,7 +179,7 @@ a {
 
     <div style="float:right;position:relative;width:50%;">
     <label><b>Number of Bins</b></label>
-    <input type="number" placeholder="Number of Bins"  name="number_bin" class="inputtype" required>
+    <input type="number" placeholder="No. of Bins"  name="number_bin" class="inputtype" required>
 
   </div>
   <br><br>

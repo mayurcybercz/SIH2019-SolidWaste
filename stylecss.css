@@ -27,9 +27,9 @@ body {
   span {
       padding: 20px;
   }
-  .btn{
+  /* .btn{
     border-radius: 20px;
-    margin-left:350px;
+   
     width: 180px;
     height: 40px;
     color: black;
@@ -38,7 +38,7 @@ body {
     background-color: #7ee8fa;
 background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
  font-weight: bolder;
-  }
+  } */
 
 
 
@@ -98,7 +98,7 @@ background-image linear-gradient(315deg, #20bf55 0%, #01baef 74%); */
   }
   .thumbnail img {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     margin-bottom: 10px;
   }
   .carousel-control.right, .carousel-control.left {
@@ -233,3 +233,4 @@ background-image linear-gradient(315deg, #20bf55 0%, #01baef 74%); */
       font-size: 150px;
     }
   }
+  

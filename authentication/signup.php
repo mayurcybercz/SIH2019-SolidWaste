@@ -78,6 +78,10 @@ a {
   background-color: #f1f1f1;
   text-align: center;
 }
+.signuptologin{
+  text-align:right;
+}
+
 </style>
 </head>
 <body>
@@ -85,6 +89,7 @@ a {
 <form class="signup-form" method="POST">
   <div class="container">
     <h1>Register</h1>
+    <p class='signuptologin'>Already a User? <a href="login.php">Login</a>.</p>
     <hr>
     <span class="half">
     <label><b>Firstname</b></label>
@@ -113,7 +118,7 @@ a {
     <label><b>Password</b></label>
     <input type="password" placeholder="Password" name="pwd" class="full" required>
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-
+   
     <button type="submit" class="registerbtn" name="submit">Register</button>
   </div>
   

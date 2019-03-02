@@ -1,6 +1,6 @@
 <?php 
 include_once 'includes/dbh.inc.php';
-include_once 'layout/header.php';
+//include_once 'layout/header.php';
 
 session_start();
 $current_user="superuser";
@@ -46,8 +46,7 @@ body {
 .container {
   padding: 12px;
   background-color: white;
-  margin-left: 25%;
-  margin-right: 25%;
+ 
 }
 
 /* Full-width input fields */
@@ -94,7 +93,7 @@ h1{
 }
 
 .inputtype{
-  width: 13vw;
+  width: 24vw;
   background-color: #ddd;
   padding: 8px 10px;
   border: none;
@@ -112,6 +111,8 @@ a {
 </style>
 </head>
 <body>
+
+
 
 <form class="signup-form"  method="POST">
   <div class="container">

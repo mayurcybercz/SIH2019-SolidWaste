@@ -25,7 +25,7 @@
 }
 
 .navlinks li a:hover {
-    background-color: rgb(248, 245, 247));
+    background-color: transparent;
 }
 
 
@@ -46,6 +46,19 @@
 
 .heading{
     font-size: 25px;
+
+}
+
+.heading a{
+    color: black;
+}
+.heading a:hover{
+    text-decoration: none;
+    color: black;
+}
+.heading a:active{
+    text-decoration: none;
+    color: black;
 }
 
 .logoimg{
@@ -70,7 +83,7 @@
 }
 .vl {
     border-left: 4px solid green;
-    height: 10px;
+    height: 400px;
   }
 
 .footer{
@@ -79,8 +92,43 @@
 
 .default-pic{
     width:100px;
-
+    
 }
+
+
+
+.jumbotron{
+  background: url('../images/j.jpg');
+  color: white;
+  
+}
+
+.userlogoutbtn{
+    background : transparent;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    border-radius: 15px 50px;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 8px;
+    padding-right:15px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.userlogoutbtn:hover{
+    background: transparent;
+    color: black;
+}
+.userlogoutbtn:active{
+    background: transparent;
+    color: black;
+}
+
+
 
 
 
@@ -137,3 +185,5 @@
     .sidenav a {font-size: 18px;}
   }
   /* notification menu */
+
+

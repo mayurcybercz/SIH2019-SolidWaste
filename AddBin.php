@@ -58,22 +58,23 @@ if(isset($_POST["submit"]))
     //echo $location;
     
     //echo $location;
-    echo "<script> alert('success'); </script>";
+    // echo "<script> alert('success'); </script>";
     echo "<script
-    src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyBEafrN_U_pOFvc8sWFWFYhScwComxhZpY\">
+    src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyAgOPIDFedEJNRjpmbHyj7oO5omGufS-Pk\">
     </script>";
     
-    $response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$location.'&key=AIzaSyBEafrN_U_pOFvc8sWFWFYhScwComxhZpY', false);
+    $response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$location.'&key=AIzaSyAgOPIDFedEJNRjpmbHyj7oO5omGufS-Pk', false);
     $resp = json_decode($response, true);
     if($resp['status']=='OK'){
       $lat = $resp['results'][0]['geometry']['location']['lat'];
       $lng = $resp['results'][0]['geometry']['location']['lng'];
       
         $command = escapeshellcmd('C:\ProgramData\Miniconda3\python.exe Dustbinvalidation.py uploads/'.$filename);
-       // echo $command;
+        echo $command;
         $pyoutput = shell_exec($command);
-        $pyoutput=trim($output);
-        //echo 'abc'.$output.'abc';
+        echo $pyoutput;
+        $pyoutput=trim($pyoutput);
+        echo 'abc'.$pyoutput.'abc';
         $output="dustbin";
         if($output === $pyoutput){
         //echo "successdustbin";
@@ -81,11 +82,12 @@ if(isset($_POST["submit"]))
         $sql="INSERT INTO dustbin_location(lat, lng, ward) VALUES ('$lat','$lng','$ward')";
         mysqli_query($conn,$sql);
         echo "<script> alert('Thank You! Dustbin has been successfully Added'); </script>";
-        // header("Location:/Final/index.php?addbin=success");
+         //header("Location:/Final/index.php?addbin=success");
         }
         else {
           //echo "faildustbin";
           echo "<script> alert('Sorry,Our AI says its not a Dustbin'); </script>";
+          //header("Location:/Final/AddBin.php?addbin=fail");
         }
     } else {
       echo "0 results";

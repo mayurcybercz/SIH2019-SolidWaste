@@ -51,8 +51,7 @@ body {
 .container {
   padding: 12px;
   background-color: white;
-  margin-left: 25%;
-  margin-right: 25%;
+ 
 }
 
 /* Full-width input fields */

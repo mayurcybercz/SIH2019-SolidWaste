@@ -90,6 +90,15 @@ if ($result->num_rows > 0) {
 
 
 </head>
+<style>
+.usericon{
+  padding: 20px;
+}
+#adminname{
+  text-transform: uppercase;
+}
+
+</style>
 
 
 <body id="page-top">
@@ -136,7 +145,7 @@ if ($result->num_rows > 0) {
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Functions:</h6>
               <a class="collapse-item" href="#">Vehicle Tracking</a>
-              <a class="collapse-item" href="../locatedustbin.php">Dustbin Tracking</a>
+              <a class="collapse-item" href="locatedustbin.php">Dustbin Tracking</a>
               <a class="collapse-item" href="factory.php">Nearby Factory</a>
               <a class="collapse-item" href="landfills.php">Landfills</a>
             </div>
@@ -223,11 +232,11 @@ if ($result->num_rows > 0) {
                   </a>
                   <!-- Dropdown - Messages -->
                   <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                    <form class="form-inline mr-auto w-100 navbar-search">
+                    <form class="form-inline mr-auto w-100 navbar-search" action="search.php" method="POST">
                       <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                          <button class="btn btn-primary" type="button">
+                          <button class="btn btn-primary" type="submit" name="submit">
                             <i class="fas fa-search fa-sm"></i>
                           </button>
                         </div>
@@ -240,10 +249,10 @@ if ($result->num_rows > 0) {
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
-                  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small " id="adminname"></span>
-                    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-                  </a>
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user usericon"> </i><span class="mr-2 d-none d-lg-inline text-gray-800" id='adminname'></span>
+              
+              </a>
                   <!-- Dropdown - User Information -->
                   <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">
@@ -279,7 +288,7 @@ if ($result->num_rows > 0) {
               <!-- Page Heading -->
               <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                <a href="../content/december.pdf" target='_blank' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                <a href="../public/images/ContainerSizing.pdf" target='_blank' class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
               </div>
 
               <!-- Content Row -->
@@ -475,7 +484,7 @@ if ($result->num_rows > 0) {
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2019</span>
+          <span>Copyright &copy; Ankur 2019</span>
         </div>
       </div>
     </footer>
@@ -505,7 +514,9 @@ if ($result->num_rows > 0) {
       <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="../authentication/admin-login.php">Logout</a>
+        <form method="POST" action="../includes/admin-logout.inc.php">
+        <button type="submit" class="btn btn-primary" name="submit">Logout</button>
+        </form>
       </div>
     </div>
   </div>

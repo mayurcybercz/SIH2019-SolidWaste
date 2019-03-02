@@ -1,8 +1,4 @@
-<?php 
 
-include_once '../layout/header.php';
-
-?>
 
 <?php
 include_once '../includes/dbh.inc.php';
@@ -48,18 +44,24 @@ body {
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+/* input[type=text], input[type=password] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
-}
+} */
 
 .full {
   background-color: #ddd;
   outline: none;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
 }
 .half{
 	float: left;
@@ -79,11 +81,12 @@ h1{
   background-color: #4CAF50;
   color: white;
   padding: 16px 20px;
-  margin: 8px 0;
+  margin: 15px 0;
   border: none;
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  display: inline-block;
 }
 
 .orderbtn:hover {

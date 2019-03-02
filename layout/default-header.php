@@ -17,10 +17,10 @@
       <a class="navbar-brand" href="../admin/index.php">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#"> Display Map</a></li>
+      <li><a href="../locatedustbin.php"> Display Map</a></li>
       <li><a href="#"> Approve Bin</a></li>
-      <li><a href="#"> View complaints</a></li>
-      <li><a href="#"> View Notifications</a></li>
+      <li><a href="complaints.php"> View complaints</a></li>
+      <li><a href="../admin/sendnotificaton.php"> Send Notifications</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> User Profile<span class="caret"></span></a>
